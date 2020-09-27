@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Mail;
 
 namespace lesson2
 {
@@ -7,7 +8,8 @@ namespace lesson2
         static void Main(string[] args)
         {
             //Console.WriteLine(Min(100,200,300));
-            Console.WriteLine(DigitCounter(-123));
+            //Console.WriteLine(DigitCounter(-123));
+            SumOfOddNum();
         }
 
         #region Задача 1 - найти минимальное число из трёх
@@ -31,6 +33,29 @@ namespace lesson2
             return cnt;
 
         }
+        #endregion
+
+        #region Задача 3 - сумма введнных нечётных чисел
+        static void SumOfOddNum()
+        {
+            int tmp, sum = 0;
+            while (true)
+            {
+                Console.Write("Введите число: ");
+                string s = Console.ReadLine();
+
+                if (s.Equals("0")) break;
+
+                if (Int32.TryParse(s, out tmp))
+                {
+                    if (tmp % 2 != 0) sum += tmp;
+                }
+                else Console.WriteLine("нужно было ввести число");
+
+            }
+            Console.WriteLine($"Сумма нечётных числел : {sum}");
+        }
+
         #endregion
     }
 
