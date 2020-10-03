@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\learn_CSharp\\lesson2\\lesson2.csproj": {}
+    "C:\\learn_CSharp\\lesson2\\lesson3.csproj": {}
   },
   "projects": {
-    "C:\\learn_CSharp\\lesson2\\lesson2.csproj": {
+    "C:\\learn_CSharp\\lesson2\\lesson3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\learn_CSharp\\lesson2\\lesson2.csproj",
+        "projectUniqueName": "C:\\learn_CSharp\\lesson2\\lesson3.csproj",
         "projectName": "lesson3",
-        "projectPath": "C:\\learn_CSharp\\lesson2\\lesson2.csproj",
+        "projectPath": "C:\\learn_CSharp\\lesson2\\lesson3.csproj",
         "packagesPath": "C:\\Users\\khali\\.nuget\\packages\\",
         "outputPath": "C:\\learn_CSharp\\lesson2\\obj\\",
         "projectStyle": "PackageReference",

@@ -1,180 +1,233 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Mail;
 using System.Runtime.InteropServices.ComTypes;
 
-namespace lesson2
+namespace lesson3
 {
     class Program
     {
-        // Курс "Основы языка С#", урок №2
+        // Курс "Основы языка С#", урок №3
         // Выполнил Халитов А. Р.
 
         static void Main(string[] args)
         {
-            string login, password;
-            double height, weight, bmi, exceedWeight;
-            int tryCount = 0;
-            bool authorized;
+            // Задача 1а - метод вычитания для структуры "Комплексное число"
+            Console.WriteLine("Задача 1а. Проверка структуры \"Комплексное число\"");
+            ComplexNumber x = new ComplexNumber(10.0, 20.0);
+            ComplexNumber y = new ComplexNumber(11.0, 22.0);
+            ComplexNumber result = y.Subtract(x);
+            Console.WriteLine($"Разность комплексных чисел {y} и {x} равна: {result}");
 
-            //Проверка задачи 1
-            Console.WriteLine(Min(100,200,300));
-            //Проверка задачи 2
-            Console.WriteLine(DigitCounter(-123));
-            //Проверка задачи 3
-            SumOfOddNum();
-            //Задача 4
-            Console.WriteLine("Программа авторизации пользователя.");
-            do
-            {
-                Console.Write("Введите логин: ");
-                login = Console.ReadLine();
+            // Задача 1б - методы вычитания и умножение класса комплексных чисел
+            Console.WriteLine("Задача 1б. Проверка класса \"Комплексное число\"");
+            Complex x1 = new Complex(100.0, 200.0);
+            Complex y1 = new Complex(101.0, 202.0);
+            Complex result1 = y1.Subtract(x1);
+            Complex result2 = y1.Multi(x1);
+            Console.WriteLine($"Разность комплексных чисел {y1} и {x1} равна: {result1}");
+            Console.WriteLine($"Произведение комплексных чисел {y1} и {x1} равна: {result2}");
 
-                Console.Write("Введите пароль: ");
-                password = Console.ReadLine();
+            // Проверка задачи 3 - класс дробь
+            Fraction fr1 = new Fraction(1, 2);
+            Fraction fr2 = new Fraction(3, 4);
 
-                Authorization(login, password, out authorized);
-                if (authorized) break;
-                else tryCount++;
+            Console.WriteLine("Задача 3. Проверка класс дроби");
+            Console.WriteLine($"Сложение : {fr1} + {fr2} = {fr1.Add(fr2)}");
+            Console.WriteLine($"Сложение : {fr1} - {fr2} = {fr1.Subtract(fr2)}");
+            Console.WriteLine($"Сложение : {fr1} * {fr2} = {fr1.Multi(fr2)}");
+            Console.WriteLine($"Сложение : {fr1} / {fr2} = {fr1.Divide(fr2)}");
 
-            } while (tryCount <3);
+            // Задача 2 - подсчёт суммы нечётных чисел
+            Console.WriteLine("Задача 2 - посчёт суммы нечётных чисел");
+            List<int> oddNumbers = new List<int>();
+            int summ = 0;
+            int number;
 
-            if (authorized) Console.WriteLine("Вы авторизованы!");
-            else Console.WriteLine("Попытки входа исчерпаны!");
-
-            // Задача 5 - ИМТ
-            Console.Write("Ваш рост (м): ");
-            height = Convert.ToDouble(Console.ReadLine());
-
-            Console.Write("Ваш вес (кг): ");
-            weight = Convert.ToDouble(Console.ReadLine());
-
-            bmi = BodyMassIndex(height, weight, out exceedWeight);
-
-            Console.WriteLine($"Ваш ИМТ = {bmi:f2}. ");
-            if (bmi < 25.0) Console.Write($"Вам следует набрать {exceedWeight:f2} кг");
-            else if (bmi > 30.0) Console.Write($"Вам следует похудеть на {exceedWeight:f2} кг");
-            else Console.Write($"У вас нормальный вес!");
-
-            // Задача 6 - число хороших чисел
-            DateTime dt1 = DateTime.UtcNow;
-            int GoodNumCount = 0;
-            for (int i = 1; i <= 1000000000; i++)
-            {
-                if (IsGood(i)) GoodNumCount++;
-            }
-            DateTime dt2 = DateTime.UtcNow;
-            Console.WriteLine($"количества хороших чисел: {GoodNumCount}");
-            Console.WriteLine($"Потрачено времени: {dt2.Subtract(dt1)}");
-
-            // Задача 7А - рекурсивмный метод, выводящий чмсла от А до B
-            RecPrintAB(1, 20);
-            // Задача 7Б - рекурсивный метод, суммирующий числа от А до B
-            Console.WriteLine("Сумма чисел от 1 до 10 : " + RecSumAB(1, 10));
-
-        }
-
-        #region Задача 1 - найти минимальное число из трёх
-        static int Min(int num1, int num2, int num3)
-        {
-            int tmp = (num1 < num2) ? num1 : num2;
-            if (tmp < num3) return tmp;
-            return num3;
-        }
-        #endregion
-
-        #region Задача 2 - подсчёт количества цифр числа
-        static int DigitCounter(int num)
-        {
-            int cnt = 0;
-            string s = Convert.ToString(num);
-            for (int i = 0; i < s.Length; i++)
-            {
-                if (char.IsDigit(s, i)) cnt++;
-            }
-            return cnt;
-
-        }
-        #endregion
-
-        #region Задача 3 - сумма введнных нечётных чисел
-        static void SumOfOddNum()
-        {
-            int tmp, sum = 0;
             while (true)
             {
-                Console.Write("Введите число: ");
-                string s = Console.ReadLine();
+                Console.Write("Введите целое число: ");
+                string userInput = Console.ReadLine();
 
-                if (s.Equals("0")) break;
+                if (userInput.Equals("0")) break;
 
-                if (Int32.TryParse(s, out tmp))
+                if (Int32.TryParse(userInput, out number))
                 {
-                    if (tmp % 2 != 0) sum += tmp;
+                    if ((number > 0) && (number % 2 != 0))
+                    {
+                        oddNumbers.Add(number);
+                        summ += number;
+                    }
                 }
-                else Console.WriteLine("нужно было ввести число");
+                else
+                {
+                    Console.WriteLine("Нужно бы ввести число");
+                }
 
             }
-            Console.WriteLine($"Сумма нечётных числел : {sum}");
-        }
-
-        #endregion
-
-        #region Задача 4 -  метод реализующий авторизацию
-        static void Authorization(string login, string password, out bool authorized)
-        {
-            authorized = login.Equals("root") && password.Equals("GeekBrains");
-        }
-        #endregion
-
-        #region Задача 5 - метод, вычисляющий ИМТ и избыточный/недостающий вес
-        static double BodyMassIndex(double height, double weight, out double excessWeight)
-        {
-            double bmi = weight / height / height;
-            if (bmi > 30.0) excessWeight = weight - 30.0 * height * height;
-            else if (bmi < 25.0) excessWeight = 25.0 * height * height - weight;
-            else excessWeight = 0.0;
-            return bmi;
-        }
-        #endregion
-
-        #region Задача 6 - метод, определяющий "хорошее" ли число
-        static bool IsGood(int number)
-        {
-            int n, digit, sumOfDigit = 0;
-            n = number;
-            while (n > 0)
+            Console.WriteLine($"Сумма нечётных положительный чисел: {summ}");
+            foreach (var item in oddNumbers)
             {
-                digit = n % 10;
-                sumOfDigit += digit;
-                n /= 10;
+                Console.Write(item + " ");
             }
-            return(number % sumOfDigit == 0); 
         }
-        #endregion
 
-        #region Задача 7а - рекурсивный метод, выводящий числа от А до В
-        static void RecPrintAB(int a, int b)
-        {
-            if (a <= b)
-            {
-                Console.Write($"{a} ");
-                RecPrintAB(++a, b);
-            }
-            else Console.WriteLine();
-        }
-        #endregion
+    }
+    // Задача 1б. Доработка класса "Комплексное число"
+    class Complex
+    {
+        public double im;
+        public double re;
 
-        #region Задача 7б - рекурсивный метод, суммирующий числа от А до В
-        static int RecSumAB(int a, int b)
+        public Complex(double im, double re)
         {
-            if (a <= b)
-            {
-                return b + RecSumAB(a, --b);
-            }
-            else return 0;
+            this.im = im;
+            this.re = re;
         }
-        #endregion
+
+        public Complex()
+        {
+            im = 0;
+            re = 0;
+        }
+
+        public Complex Plus(Complex x)
+        {
+            Complex result = new Complex();
+            result.re = re + x.re;
+            result.im = im + x.im;
+
+            return result;
+        }
+        public Complex Multi(Complex x)
+        {
+            Complex result = new Complex();
+            result.re = re * x.re - im * x.im;
+            result.im = im * x.re + re * x.im;
+
+            return result;
+        }
+        public Complex Subtract(Complex x)
+        {
+            Complex result = new Complex();
+            result.re = re - x.re;
+            result.im = im - x.im;
+
+            return result;
+        }
+
+        public override string ToString()
+        {
+            return re + "+" + im + "i";
+        }
     }
 
+    // Задача 1а. доработка структуры "Комплексное число"
+    struct ComplexNumber
+    {
+        public double im;
+        public double re;
 
+        public ComplexNumber(double im, double re)
+        {
+            this.im = im;
+            this.re = re;
+        }
+        //  в C# в структурах могут храниться также действия над данными
+        public ComplexNumber Plus(ComplexNumber x)
+        {
+            ComplexNumber y;
+            y.im = im + x.im;
+            y.re = re + x.re;
+            return y;
+        }
+        //  Пример произведения двух комплексных чисел
+        public ComplexNumber Multi(ComplexNumber x)
+        {
+            ComplexNumber y;
+            y.im = re * x.im + im * x.re;
+            y.re = re * x.re - im * x.im;
+            return y;
+        }
+        public ComplexNumber Subtract(ComplexNumber x)
+        {
+            ComplexNumber y;
+            y.im = im - x.im;
+            y.re = re - x.re;
+            return y;
+        }
+        public override string ToString()
+        {
+            return re + "+" + im + "i";
+        }
+    }
+
+    //Задача 3 - класс дробь
+    class Fraction
+    {
+        int num;
+        int denom;
+
+        public Fraction(int num, int denom)
+        {
+            if (denom == 0) throw new ArgumentException("Знаменатель не может быть равен 0");
+            this.num = num;
+            this.denom = denom;
+        }
+
+        public Fraction Add(Fraction x)
+        {
+            Fraction result = new Fraction(x.denom * num + denom * x.num, denom * x.denom);
+            result.Simplify();
+            return result;
+        }
+
+        public Fraction Subtract(Fraction x)
+        {
+            Fraction result = new Fraction(x.denom * num - denom * x.num, denom * x.denom); ;
+            result.Simplify();
+            return result;
+
+        }
+
+        public Fraction Multi(Fraction x)
+        {
+            Fraction result = new Fraction(num * x.num, denom * x.denom);
+            result.Simplify();
+            return result;
+        }
+
+        public Fraction Divide(Fraction x)
+        {
+            Fraction result = new Fraction(num * x.denom, denom * x.num);
+            result.Simplify();
+            return result;
+        }
+
+        public double ToDouble
+        {
+            get
+            {
+                return (double)num / denom;
+            }
+        }
+
+        public void Simplify()
+        {
+            for (int i = denom / 2; i > 1; i--)
+            {
+                if ((denom % i == 0) && (num % i == 0))
+                {
+                    denom /= i;
+                    num /= i;
+                }
+            }
+        }
+
+        public override string ToString()
+        {
+            return num + "/" + denom;
+        }
+    }
+    
 }
