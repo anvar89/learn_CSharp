@@ -3,80 +3,58 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Mail;
 using System.Runtime.InteropServices.ComTypes;
+using System.Text.RegularExpressions;
 
-namespace lesson4
+namespace lesson5
 {
     class Program
     {
-        // Курс "Основы языка С#", урок №4
+        // Курс "Основы языка С#", урок №5
         // Выполнил Халитов А. Р.
 
         static void Main(string[] args)
         {
-            Random rnd = new Random();
-            int[] array = new int[20];
+            Console.WriteLine("Задача 1 - проверка логина с помощью регулярных выражений");
+            Console.Write("Введите логин:");
+            String login = Console.ReadLine();
 
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = rnd.Next(-10000, 10000);
-            }
-            // Проверка задачи 1, 2а
-            Console.WriteLine("Задача 1, 2а");
-            Console.WriteLine("Исседуемый массив");
-            foreach (var item in array)
-            {
-                Console.Write($"{item} ");
-            }
-            Console.WriteLine();
-            Console.WriteLine($"Результат: {StaticClass.CountPairs(array)}");
+            Console.WriteLine("А - Проверка логина методом с использованием регулярный выражений");
+            if (Task1.IsCorrect(login)) Console.WriteLine("Логин корректен!");
+            else Console.WriteLine("Логин не корректен!");
 
-
-            Console.WriteLine("Задача 2б - метод чтения массива из файла");
-            int[] arr = StaticClass.ReadArrFromFile(@"C:\learn_CSharp\array.txt");
-
-            foreach (var item in arr)
-            {
-                Console.Write($"{item} ");
-            }
-            Console.WriteLine();
-            Console.WriteLine("Задача 2в - Нет файла");
-            int[] arr2 = StaticClass.ReadArrFromFile(@"C:\learn_CSharp\array2222.txt");
-
+            Console.WriteLine("Б - Проверка логина методом без использования регулярных выражений");
+            if (Task1.IsCorrectAlt(login)) Console.WriteLine("Логин корректен!");
+            else Console.WriteLine("Логин не корректен!");
         }
-
-    }
-
-    static class StaticClass
-    {
-        public static int CountPairs(int[] arr)
+        static class Task1
         {
-            int cnt = 0;
-            for (int i = 0; i < (arr.Length - 1); i++)
+            public static bool IsCorrect(string login)
             {
-                if ((arr[i] % 3 == 0) ^ (arr[i + 1] % 3 == 0)) cnt++;
+                Regex regex = new Regex(@"((^\D{1})([a-zA-Z0-9]{1,9})){1,10}$", RegexOptions.IgnoreCase);
+                return regex.IsMatch(login);
             }
-            return cnt;
-        }
-        
-        public static int[] ReadArrFromFile(string path)
-        {       
-            try
-            {
-                StreamReader sr = new StreamReader(path);
-                String[] strArr = (sr.ReadLine()).Split(" ");
-                int[] result = new int[strArr.Length];
 
-                for (int i = 0; i < strArr.Length; i++)
-                {
-                    if (!Int32.TryParse(strArr[i], out result[i])) result[i] = 0;
-                }
-                return result;
-            }
-            catch(FileNotFoundException e)
+            public static bool IsCorrectAlt(string login)
             {
-                Console.WriteLine("Файл не найден");
-                return null;
+                login = login.ToLower();
+                if ((login.Length > 1) && (login.Length < 11))
+                {
+                    if (char.IsLetter(login[0]))
+                    {
+                        for (int i = 1; i < login.Length; i++)
+                        {
+                            if (!char.IsLetterOrDigit(login[i])) return false;
+                        }
+                        return true;
+                    }
+                }
+                return false;
             }
+        }
+
+        static class Message
+        {
+
         }
     }
  
