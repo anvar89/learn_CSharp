@@ -111,6 +111,7 @@ namespace lesson6
             Table(Func1, 0, 10, 1);
             Table(Func2, 0, 10, 1);
 
+            // Задача 2 - демонстрация и реализация меню
             bool correctChoose = false;
             int funcNum;
             double startInterval, endInterval, min;
