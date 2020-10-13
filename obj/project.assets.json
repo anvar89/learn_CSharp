@@ -13,9 +13,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\learn_CSharp\\lesson5.csproj",
+      "projectUniqueName": "C:\\learn_CSharp\\lesson6.csproj",
       "projectName": "lesson3",
-      "projectPath": "C:\\learn_CSharp\\lesson5.csproj",
+      "projectPath": "C:\\learn_CSharp\\lesson6.csproj",
       "packagesPath": "C:\\Users\\khali\\.nuget\\packages\\",
       "outputPath": "C:\\learn_CSharp\\obj\\",
       "projectStyle": "PackageReference",
